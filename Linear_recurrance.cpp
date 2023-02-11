@@ -118,10 +118,8 @@ int Fibo_sum_1(int n, int m)
     return (Fibo(m + 2) - Fibo(n + 1) + mod) % mod;
 }
 // Tc will be O(sz^3 logn )
-int Fibo_sum_2(int n, int m)
+int Fibo_2(int n)
 {
-    if (n <= -1)
-        return 0;
     if (n <= 1)
         return n;
     n -= 1;
@@ -129,8 +127,8 @@ int Fibo_sum_2(int n, int m)
     Matrix res, t;
     res.Identity();
     t.arr[0][0] = t.arr[0][1] = t.arr[0][2] = 1;
-    t.arr[1][0] = t.arr[1][1] = 1;
-    t.arr[2][0] = 1;
+    t.arr[1][1] = t.arr[1][2] = 1;
+    t.arr[2][1] = 1;
     while (n)
     {
         if (n & 1)
@@ -142,7 +140,12 @@ int Fibo_sum_2(int n, int m)
     }
     return (res.arr[0][0] + res.arr[0][1]) % mod;
 }
+int Fibo_sum_2(int n,int m)
+{
+    return (Fibo_2(m)-Fibo_2(n-1)+mod)%mod;
+}
 int main()
 {
+    cout<<Fibo_sum_2(4,7);
     return 0;
 }
